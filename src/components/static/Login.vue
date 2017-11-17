@@ -10,9 +10,11 @@
 </template>
 <script>
 import Vue from "vue"
+import Router from 'vue-router'
 import Authservice from "@/service/authservice"
 
 Vue.use(Authservice)
+Vue.use(Router)
 
 export default {
   name: 'Login',
@@ -25,7 +27,7 @@ export default {
    methods: {
     doLongin() {       
      var LogedOnUser = Authservice.login(); 
-     console.log(LogedOnUser);
+     this.$router.replace('dashboard');
     }}
 }
 </script>
