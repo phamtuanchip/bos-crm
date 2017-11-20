@@ -25,8 +25,11 @@ export default {
     }
   },
    methods: {
-    doLongin() {       
-     var LogedOnUser = Authservice.login(); 
+    doLongin() {
+     var credential = {Username : this.user.uid, Password : this.user.pwd}    
+     var LogedOnUser = Authservice.login(credential,'',''); 
+     console.log(LogedOnUser);    
+     if(LogedOnUser.authenticated)    
      this.$router.replace('dashboard');
     }}
 }
