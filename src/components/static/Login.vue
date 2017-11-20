@@ -1,37 +1,71 @@
 
 <template>
-<div>
+<form  @submit.prevent="doLongin()">
+  <p>
+    <label>Bây giờ:</label>
+    <span>{{currentTime}}</span>
+  </p>
   <label>Username</label>
-  <input type='text' v-model="user.uid"/>
+  <input type='text' v-model="user.Username"/>
   <label>Password</label>
-  <input type='password' v-model="user.pwd"/>
-  <input type='submit'  v-on:click="doLongin"/>
- </div>
+  <input type='password' v-model="user.Password"/>
+  <input type='submit' />
+ </form>
 </template>
 <script>
 import Vue from "vue"
 import Router from 'vue-router'
 import Authservice from "@/service/authservice"
+import CRMservice from "@/service/crmservice"
 
 Vue.use(Authservice)
+Vue.use(CRMservice)
 Vue.use(Router)
+Vue.use(require('vue-moment'));
 
 export default {
   name: 'Login',
   data () {
     return {
       msg: 'Welcome to login form',
-      user: {uid: 'admin', pwd: '123456789'}
+      user: {Username: 'admin', Password: '123456789'},
+      currentTime: null
     }
   },
    methods: {
     doLongin() {
-     var credential = {Username : this.user.uid, Password : this.user.pwd}    
-     var LogedOnUser = Authservice.login(credential,'',''); 
-     console.log(LogedOnUser);    
-     if(LogedOnUser.authenticated)    
-     this.$router.replace('dashboard');
-    }}
+     Authservice.login(this.user).then((data) =>{
+      console.log(data);
+      if(data.success){
+        alert('Đăng nhập thành công tài khoản ' + this.user.Username);
+        // this.$router.replace('/');
+      } else {
+        alert('Nhập sai tên đăng nhập hoặc mật khẩu');
+      }
+     });
+      if(localStorage.getItem('SessionId')){
+        var params = {
+          RequestClass: "xBase",
+          RequestAction: "SearchBinary",
+          // Parent: $attrs.parent,
+          ConditionFields: 'Parent',
+          StaticFields: 'Name;Created;Modified;FileName;FileExtension;FileSize;CreatedBy;Description;Parent;FileSize',
+          DynamicFields: 'CreatedByName;SignatureVerified'
+        };
+        CRMservice.post(params).then((data) =>{
+          console.log(data);
+        });
+      }
+     // this.$router.replace('dashboard');
+    },
+    updateCurrentTime() {
+      this.currentTime = new Date().toLocaleString();
+    }
+  },
+  created() {
+    this.currentTime = new Date().toLocaleString();
+    setInterval(() => this.updateCurrentTime(), 1 * 1000);
+  }
 }
 </script>
 
