@@ -1,0 +1,4 @@
+npm install lodash --save
+npm install moment --save
+npm install axios --save
+npm install sass-loader node-sass style-loader --save

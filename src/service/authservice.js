@@ -25,12 +25,28 @@ export default {
 		      .then(response => {
 		        console.log('Success!:', response.data);        
 		        if(response.data.success) {
-		              
-		              let user = { userId : credential.Username , sessionId : response.data.Data, authenticated : true };
+		                let params = {
+                            RequestAction: "GetUserInformation",
+                            RequestClass: "BPM",
+                            SessionId: response.data.Data
+                          };
+                        let fData = new FormData();
+                        for ( var key in params ) {
+                            fData.append(key, params[key]);
+                        }
+                       
+                        localStorage.setItem('SessionId', response.data.Data)
+                        Vue.http.post(url, fData, headers).then(res =>{
+                            console.log(res.data);
+                            let user = res.data;
+                            localStorage.setItem('logedOnUser',JSON.stringify(user))		           
+                        }, function(res){
+                            reject('Error!:', res.data); 
+                        });
+                        //let user = { userId : credential.Username , sessionId : response.data.Data, authenticated : true };
 		            //this.$store.state.user = this.user;
 		            //localStorage.setItem('id_token', data.Data)
-		            localStorage.setItem('logedOnUser',JSON.stringify(user))
-		            localStorage.setItem('SessionId', response.data.Data)
+		           
 		            //localStorage.setItem('access_token', data.Data)
 		            resolve(response.data);
 		             
