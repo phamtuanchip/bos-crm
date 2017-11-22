@@ -1,5 +1,6 @@
 <template>
   <div class="hello">
+        <Navigation></Navigation>
     <h1>{{ msg }}</h1>
      <ul>
        <li > <router-link to="/">Home</router-link></li>
@@ -18,7 +19,12 @@
 <script>
 import Vue from 'vue'    
 import Vuex from 'vuex'
+import Navigation from '@/components/static/Navigation'    
 Vue.use(Vuex)
+ //Vue.use(Navigation)  
+/* dynamic create compnent */
+Vue.component('Navigation', Navigation)
+
   const store = new Vuex.Store({
   state: {
     count: 0
