@@ -6,7 +6,9 @@
        <li > <router-link to="/">Home</router-link></li>
        <li > <router-link to="/dashboard">Dashboard</router-link></li>
        <li > <router-link to="/login">Login</router-link></li>
-       <li > <router-link to="/upload">Upload</router-link></li>     
+       <li > <router-link to="/upload">Upload</router-link></li>   
+        <li > <router-link to="/request">Request</router-link></li>  
+        <li > <router-link to="/datetimepicker">DateTime Picker</router-link></li>  
      </ul>
     <p>{{ count }}</p>
     <p>
