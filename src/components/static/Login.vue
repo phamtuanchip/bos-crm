@@ -49,28 +49,29 @@ export default {
       if(data.success){
         this.loginName = this.user.Username;
         alert('Đăng nhập thành công tài khoản ' + this.user.Username);
+        this.$router.push('Dashboard')
         // this.$router.replace('/');
       } else {
         alert('Nhập sai tên đăng nhập hoặc mật khẩu');
       }
      });
-      if(localStorage.getItem('SessionId')){
-        var params = {
-          RequestClass: "xBase",
-          RequestAction: "SearchBinary",
-          // Parent: $attrs.parent,
-          ConditionFields: 'Parent',
-          StaticFields: 'Name;Created;Modified;FileName;FileExtension;FileSize;CreatedBy;Description;Parent;FileSize',
-          DynamicFields: 'CreatedByName;SignatureVerified'
-        };
-        var param = Lodash.clone(params);
-        params.abc = "abc";
-        console.log(params);
-        console.log(param);
-        CRMservice.post(param).then((data) =>{
-          console.log(data);
-        });
-      }
+      // if(localStorage.getItem('SessionId')){
+      //   var params = {
+      //     RequestClass: "xBase",
+      //     RequestAction: "SearchBinary",
+      //     // Parent: $attrs.parent,
+      //     ConditionFields: 'Parent',
+      //     StaticFields: 'Name;Created;Modified;FileName;FileExtension;FileSize;CreatedBy;Description;Parent;FileSize',
+      //     DynamicFields: 'CreatedByName;SignatureVerified'
+      //   };
+      //   var param = Lodash.clone(params);
+      //   params.abc = "abc";
+      //   console.log(params);
+      //   console.log(param);
+      //   CRMservice.post(param).then((data) =>{
+      //     console.log(data);
+      //   });
+      // }
      // this.$router.replace('dashboard');
     },
     doLongout() {
