@@ -15,35 +15,39 @@ export default new Router({
     {
       path: '/',
       name: 'Home',
-      component: Home
+      component: Home,
+      meta: { requiresAuth: true }
     },
     {
       path: '/login',
       name: 'Login',
-      component: Login
+      component: Login,
     },
     {
       path: '/dashboard',
       name: 'Dashboard',
-      component: Dashboard
+      component: Dashboard,
+      meta: { requiresAuth: true }
     },
     {
       path: '/upload',
       name: 'Upload',
-      component: Upload
-    }  
-    ,
+      component: Upload,
+      meta: { requiresAuth: true }
+    },
     {
       path: '/request',
         name: 'Request',
-        component: Request
-
+        component: Request,
+        meta: { requiresAuth: true }
     },
      {
        path: '/datetimepicker',
        name: 'DateTime Picker',
-       component: DateTime
-     }
+       component: DateTime,
+       meta: { requiresAuth: true }
+    },
 
-  ]
+  ],
+
 })

@@ -1,6 +1,7 @@
 <template>
   <div id="app">
     <img src="./assets/logo.png">
+    <Navigation></Navigation>
     <router-view/>
     <br>
     <!-- // event  -->
@@ -12,10 +13,19 @@
 </template>
 
 <script>
+import Vue from 'vue'    
+import Vuex from 'vuex'    
 import Header from './components/Header';
 import Footer from './components/Footer';
 import Names from './components/Name';
+import Navigation from './components/static/Navigation';
+import Authservice from "./service/authservice";
+// import Router from 'vue-router'
 
+Vue.use(Authservice)
+Vue.use(Vuex)
+Vue.component('Navigation', Navigation)
+// Vue.use(Router)
 
 export default {
   name: 'app',
@@ -48,6 +58,17 @@ data () {
     reversedMessage: function () {
       // `this`  to the vm instance
       return this.title.split('').reverse().join('')
+    }
+  },
+  created() {
+    if(localStorage.getItem('SessionId')){
+      Authservice.checkSession().then((data) =>{
+        if(!data.UserId){
+          this.$router.push('Login')
+        }
+     });
+    } else {
+      this.$router.push('Login') 
     }
   }
 }

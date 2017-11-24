@@ -1,15 +1,6 @@
 <template>
   <div class="hello">
-        <Navigation></Navigation>
     <h1>{{ msg }}</h1>
-     <ul>
-       <li > <router-link to="/">Home</router-link></li>
-       <li > <router-link to="/dashboard">Dashboard</router-link></li>
-       <li > <router-link to="/login">Login</router-link></li>
-       <li > <router-link to="/upload">Upload</router-link></li>   
-        <li > <router-link to="/request">Request</router-link></li>  
-        <li > <router-link to="/datetimepicker">DateTime Picker</router-link></li>  
-     </ul>
     <p>{{ count }}</p>
     <p>
     <button @click="increment">+</button>
@@ -20,12 +11,10 @@
 
 <script>
 import Vue from 'vue'    
-import Vuex from 'vuex'
-import Navigation from '@/components/static/Navigation'    
+import Vuex from 'vuex'    
 Vue.use(Vuex)
  //Vue.use(Navigation)  
 /* dynamic create compnent */
-Vue.component('Navigation', Navigation)
 
   const store = new Vuex.Store({
   state: {

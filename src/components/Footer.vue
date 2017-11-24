@@ -1,6 +1,6 @@
 <template>
   <footer>
-  <p>{{aaa}}  {{title}}</p>
+  <p>{{aaa}}  {{ftitle}}</p>
   </footer>
 </template>
 
@@ -9,18 +9,20 @@ import{bus} from '../main';
 export default {
 props:{
   title:{
-    type:String
+    type:String,
   }
 },
   data () {
     return {
-    aaa:'Xin chao'
+    aaa:'Xin chao',
+    ftitle:''
     }
   }
   ,created(){
     bus.$on('titleChange',(data)=>{
-      this.title=data;
+      this.ftitle=data;
     });
+    this.ftitle = this.title;
   }
 }
 </script>

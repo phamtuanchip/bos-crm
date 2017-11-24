@@ -7,13 +7,13 @@
 </template>
 
 <script>
-import GetRequest from './components/request/GetRequest'
-import AddBlog from './components/request/AddBlog'
+// import GetRequest from './components/request/GetRequest'
+// import AddBlog from './components/request/AddBlog'
 
 export default {
   components:{
-    'add-blog':AddBlog,
-    'get-res':GetRequest
+    // 'add-blog':AddBlog,
+    // 'get-res':GetRequest
   },
   name: 'req',
   data () {

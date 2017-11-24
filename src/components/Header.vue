@@ -10,13 +10,14 @@ import{bus} from '../main';
 
 export default {
 props:{
-title:{
-  type:String
-}
+  title:{
+    type:String,
+    default:'SME hospital'
+  }
 },
   data () {
     return {
-    title:'SME hospital'
+    // title:'SME hospital'
     }
   },
   methods:{

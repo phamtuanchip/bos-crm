@@ -1,27 +1,36 @@
 
 <template>
-<form  @submit.prevent="doLongin()">
+<form>
   <p>
     <label>Bây giờ:</label>
     <span>{{currentTime}}</span>
   </p>
-  <label>Username</label>
-  <input type='text' v-model="user.Username"/>
-  <label>Password</label>
-  <input type='password' v-model="user.Password"/>
-  <input type='submit' />
+  <div v-if="!loginName || loginName==''">
+    <label>Username</label>
+    <input type='text' v-model="user.Username"/>
+    <label>Password</label>
+    <input type='password' v-model="user.Password"/>
+    <input type='submit' v-on:click="doLongin()"/>
+  </div>
+  <div v-else>
+    <label>Bạn đã đăng nhập vào tài khoản {{loginName}}</label>
+    <button v-on:click="doLongout()">Đăng xuất</button>
+  </div>
  </form>
 </template>
 <script>
 import Vue from "vue"
 import Router from 'vue-router'
+import Lodash from 'lodash'
+import moment from 'vue-moment'
 import Authservice from "@/service/authservice"
 import CRMservice from "@/service/crmservice"
 
 Vue.use(Authservice)
 Vue.use(CRMservice)
 Vue.use(Router)
-Vue.use(require('vue-moment'));
+Vue.use(Lodash);
+Vue.use(moment);
 
 export default {
   name: 'Login',
@@ -29,7 +38,8 @@ export default {
     return {
       msg: 'Welcome to login form',
       user: {Username: 'admin', Password: '123456789'},
-      currentTime: null
+      currentTime: null,
+      loginName: localStorage.getItem('logedOnUser') ? JSON.parse(localStorage.getItem('logedOnUser')).LoginName : ''
     }
   },
    methods: {
@@ -37,6 +47,7 @@ export default {
      Authservice.login(this.user).then((data) =>{
       console.log(data);
       if(data.success){
+        this.loginName = this.user.Username;
         alert('Đăng nhập thành công tài khoản ' + this.user.Username);
         // this.$router.replace('/');
       } else {
@@ -52,18 +63,29 @@ export default {
           StaticFields: 'Name;Created;Modified;FileName;FileExtension;FileSize;CreatedBy;Description;Parent;FileSize',
           DynamicFields: 'CreatedByName;SignatureVerified'
         };
-        CRMservice.post(params).then((data) =>{
+        var param = Lodash.clone(params);
+        params.abc = "abc";
+        console.log(params);
+        console.log(param);
+        CRMservice.post(param).then((data) =>{
           console.log(data);
         });
       }
      // this.$router.replace('dashboard');
     },
+    doLongout() {
+    Authservice.logout()
+    this.loginName = '';
+     // this.$router.replace('dashboard');
+    },
     updateCurrentTime() {
-      this.currentTime = new Date().toLocaleString();
+      // this.currentTime = new Date().toLocaleString();
+      this.currentTime = Vue.moment().format('LTS');
     }
   },
   created() {
-    this.currentTime = new Date().toLocaleString();
+    console.log(JSON.parse(localStorage.getItem('logedOnUser')))
+    this.currentTime = Vue.moment().format('LTS');
     setInterval(() => this.updateCurrentTime(), 1 * 1000);
   }
 }
