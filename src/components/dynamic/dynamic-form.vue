@@ -48,7 +48,7 @@
       console.log(this.formdata.inputs)
       this.formdata.inputs.forEach(input =>{ 
         if(input.value){
-          this['vmodel.' + input.name] = input.value;
+          this.vmodel[input.name] = input.value;
         }
       })
     }
