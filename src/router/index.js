@@ -5,7 +5,9 @@ import Login from '@/components/static/Login'
 import Dashboard from '@/components/static/Dashboard'
 import Upload from '@/components/static/FilesUpload'
 import DateTime from '@/components/static/DateTimePicker'
+import Form from '@/components/static/Form'
 import Request from '@/components/Request'
+import DynamicForm from '@/components/dynamic/dynamic-form'
 
 
 Vue.use(Router)
@@ -45,6 +47,18 @@ export default new Router({
        path: '/datetimepicker',
        name: 'DateTime Picker',
        component: DateTime,
+       meta: { requiresAuth: true }
+    },
+    {
+       path: '/dynamicform',
+       name: 'Dynamic Form',
+       component: DynamicForm,
+       meta: { requiresAuth: true }
+    },
+    {
+       path: '/form',
+       name: 'Form',
+       component: Form,
        meta: { requiresAuth: true }
     },
 

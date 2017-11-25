@@ -10,9 +10,9 @@
     "build": "node build/build.js"
   },
   "dependencies": {
-    "lodash": "^4.17.4",
     "axios": "^0.17.1",
     "jquery": "^3.2.1",
+    "lodash": "^4.17.4",
     "ms-signalr-client": "^2.2.7",
     "node-sass": "^4.7.2",
     "sass-loader": "^6.0.6",

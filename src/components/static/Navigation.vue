@@ -6,7 +6,9 @@
         <li > <router-link to="/login">Login</router-link></li>
         <li > <router-link to="/upload">Upload</router-link></li>   
         <li > <router-link to="/request">Request</router-link></li>  
-        <li > <router-link to="/datetimepicker">DateTime Picker</router-link></li>  
+        <li > <router-link to="/datetimepicker">DateTime Picker</router-link></li>
+        <li > <router-link to="/form">Form</router-link></li>  
+        <li > <router-link to="/dynamicform">Dynamic Form</router-link></li>  
       </ul>
       <ol>
         <li v-for="n in arrPages" v-if="n.IsShowOnMenu == 'true' || n.IsShowOnMenu"> <router-link :to="n.UrlPage">{{n.Caption}}</router-link></li>
