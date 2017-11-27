@@ -73,6 +73,7 @@
               R1_ParentCode: "xSetting.Project.Page"
             };
             CRMservice.post(params).then((data) =>{
+              if(data.R) {
               this.arrPages = (data.R1.Data && data.R1.Data.DynamicDS.Setting) ? data.R1.Data.DynamicDS.Setting : [];
               if(this.arrPages.length > 0){
                 this.arrPages.forEach(function(item){
@@ -95,6 +96,7 @@
               }
               console.log(this.arrPages)
               localStorage.setItem('ListPages', JSON.stringify(this.arrPages));
+              }
             });
           }
         },
